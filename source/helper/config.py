@@ -6,6 +6,7 @@ class Setting(BaseSettings):
     APP_VERSION: str
     FILE_ALLOWED_EXTENSIONS: list[str]
     FILE_MAX_SIZE_MB: int
+    DEFAULT_CHUNK_SIZE: int
 
     class Config:
         env_file = ".env"
