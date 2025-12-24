@@ -1,8 +1,8 @@
 from controllers.BaseController import BaseController
 from fastapi import UploadFile
 from models import ResponseSignal
-from controllers import ProjectController
-import regex as re
+from controllers.ProjectController import ProjectController
+import re
 import os
 
 class DataController(BaseController):
@@ -20,7 +20,7 @@ class DataController(BaseController):
         
         return True, ResponseSignal.FILE_VALID.value
     
-    def generate_unique_filename(self, original_filename: str, project_id: str) -> str:
+    def generate_unique_filename(self, original_filename: str, project_id: str) -> tuple[str, str]:
         random_str = self.generate_random_string()
         project_path = ProjectController().get_project_pass(project_id)
         cleaned_name = self.clean_filename(original_filename)
@@ -31,6 +31,8 @@ class DataController(BaseController):
             random_str = self.generate_random_string()
             unique_filename = f"{random_str}_{cleaned_name}"
             file_path = os.path.join(project_path, unique_filename)
+        
+        return unique_filename, file_path
 
     def clean_filename(self, filename: str) -> str:
         cleaned_name = re.sub(r'[^\w.]', '', filename)
