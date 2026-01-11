@@ -3,7 +3,7 @@ from typing import Optional
 from bson.objectid import ObjectId
 
 class Project(BaseModel):
-    _id : Optional[ObjectId]
+    id : Optional[ObjectId] = Field(None, alias="_id")
     project_id : str = Field(..., min_length=1)
 
     @field_validator('project_id')
@@ -12,5 +12,5 @@ class Project(BaseModel):
             raise ValueError('project_id must not be empty or whitespace')
         return v
     
-    class config:
+    class Config:
         arbitrary_types_allowed = True

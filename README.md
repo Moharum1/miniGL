@@ -10,4 +10,4 @@ Is a minimal implementation for a RAG model to answer question of OpenGL 4.0 API
 
 ### Run the server
 - The app runs on uvicorn server a fast server that is written in rust in order to run our fast api code on it we use the below command
-`python -m uvicorn main:app --reload`
+`python3 -m uvicorn main:app --reload`
